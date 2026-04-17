@@ -1,7 +1,5 @@
 package com.codejourney.core;
 
-import com.codejourney.dto.Employee;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +26,10 @@ Important methods:
 
 public class SecondHighestSalaryByManager {
   public static void main(String[] args) {
-    List<Employee> employeeSampleData = Employee.getEmployeeSampleData();
+    List<MyEmployee> employeeSampleData = MyEmployee.getEmployeeSampleData();
 
-    Map<String, List<Employee>> managerMap = employeeSampleData.stream()
-            .collect(Collectors.groupingBy(Employee::manager));
+    Map<String, List<MyEmployee>> managerMap = employeeSampleData.stream()
+            .collect(Collectors.groupingBy(MyEmployee::manager));
 
     managerMap.forEach((manager, employeeList)->{
           System.out.println("Manager: "+manager);
@@ -42,10 +40,30 @@ public class SecondHighestSalaryByManager {
           }
 
           employeeList.stream()
-                  .sorted(Comparator.comparingDouble(Employee :: salary).reversed())
+                  .sorted(Comparator.comparingDouble(MyEmployee :: salary).reversed())
                   .skip(1)
                   .findFirst()
                   .ifPresent(System.out::println);
     });
+  }
+}
+
+ record MyEmployee(int id,
+                       String name,
+                       double salary,
+                       String manager,
+                       String city,
+                       String dept) {
+
+  public static List<MyEmployee> getEmployeeSampleData() {
+    return List.of(
+            new MyEmployee(1, "Alice", 90000, "M1", "Bangalore", "IT"),
+            new MyEmployee(2, "Bob", 75000, "M1", "Hyderabad", "IT"),
+            new MyEmployee(3, "Charlie", 80000, "M1", "Chennai", "IT"),
+
+            new MyEmployee(4, "David", 95000, "M2", "Pune", "HR"),
+            new MyEmployee(5, "Eve", 70000, "M2", "Mumbai", "HR"),
+            new MyEmployee(6, "Frank", 85000, "M2", "Delhi", "HR")
+    );
   }
 }
