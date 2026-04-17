@@ -1,5 +1,11 @@
 package com.codejourney.dto;
 
+/*
+Important methods:
+      record class
+      List.of(list of employee object);
+*/
+
 import java.util.List;
 
 public record Employee(int id,

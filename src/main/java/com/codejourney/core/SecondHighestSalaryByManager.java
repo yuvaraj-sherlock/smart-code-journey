@@ -15,6 +15,17 @@ Pattern: Map + Grouping + Top-K
 Trigger: "for each manager" + "second highest"
 Core Tweak: Maintain top 2 salaries
 */
+
+/*
+Important methods:
+      Collectors.groupingBy(Function);
+      Map.forEach((key,value)->Consumer);
+      .sorted(Comparator.comparingDouble(Function).reversed())
+      .skip(1)
+      .findFirst()
+      .ifPresent()
+*/
+
 public class SecondHighestSalaryByManager {
   public static void main(String[] args) {
     List<Employee> employeeSampleData = Employee.getEmployeeSampleData();
