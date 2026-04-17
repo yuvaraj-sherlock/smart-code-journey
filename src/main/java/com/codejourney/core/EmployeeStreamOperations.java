@@ -45,6 +45,8 @@ public class EmployeeStreamOperations {
 
     groupEmployeesByCityAndReturnCityEmployeeName(dummyEmployees);
 
+    findMaxSalariedEmployee(dummyEmployees);
+
     find3rdHighestSalary(dummyEmployees);
 
     Map<String, Double> map = convertListOfEmployeeToMap(dummyEmployees);
@@ -92,6 +94,12 @@ public class EmployeeStreamOperations {
             .skip(2)
             .findFirst()
             .ifPresent(System.out::println);
+  }
+  private static void findMaxSalariedEmployee(List<Employee> dummyEmployees) {
+    Employee employee = dummyEmployees.stream()
+            .max(Comparator.comparing(Employee::salary))
+            .get();
+    System.out.println(employee);
   }
 
 
