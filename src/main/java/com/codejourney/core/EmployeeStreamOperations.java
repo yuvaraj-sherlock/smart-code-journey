@@ -19,6 +19,7 @@ Important methods:
       sorted(Map.Entry.comparingByValue())
       sorted(Map.Entry.<String,Double>comparingByValue().reversed())
       Collectors.toMap(KEY,VALUE,(e1,e2)->e1,LinkedHashMap::new);
+      Collectors.mapping(Function, Collectors.toList());
 */
 record Employee(String name, double salary, String city) {
   public static List<Employee> getDummyEmployees() {
@@ -39,6 +40,10 @@ public class EmployeeStreamOperations {
     List<Employee> dummyEmployees = Employee.getDummyEmployees();
 
     getHighSalaryEmployeeNamesInReverseUppercase(dummyEmployees);
+
+    groupEmployeesByCity(dummyEmployees);
+
+    groupEmployeesByCityAndReturnCityEmployeeName(dummyEmployees);
 
     Map<String, Double> map = convertListOfEmployeeToMap(dummyEmployees);
 
@@ -61,6 +66,24 @@ public class EmployeeStreamOperations {
             .toList();
     System.out.println(list);
   }
+
+  //Group Employees by City
+  private static void groupEmployeesByCity(List<Employee> dummyEmployees){
+    Map<String, List<Employee>> map = dummyEmployees.stream()
+            .collect(Collectors.groupingBy(emp -> emp.city()));
+    System.out.println(map);
+  }
+
+  //Group Employees by City but show only the employee names instead of complete employee object
+  private static void groupEmployeesByCityAndReturnCityEmployeeName(List<Employee> dummyEmployees){
+    Map<String, List<String>> map = dummyEmployees.stream()
+            .collect(
+                    Collectors.groupingBy(
+                            emp -> emp.city(),
+                            Collectors.mapping(emp -> emp.name(), Collectors.toList())));
+    System.out.println(map);
+  }
+
 
   // convert List<Employee> into Map<empName,salary>
   private static Map<String, Double> convertListOfEmployeeToMap(List<Employee> dummyEmployees) {
