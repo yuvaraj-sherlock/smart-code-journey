@@ -1,4 +1,4 @@
-package com.codejourney.core;
+package com.codejourney.strings;
 
 import java.util.Map;
 import java.util.function.Function;

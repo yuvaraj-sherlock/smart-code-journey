@@ -135,4 +135,21 @@ public class StringOperations {
                 .sum();
         System.out.println("Input: \"" + number + "\" → Digit sum: " + sum);
     }
+  //Program to reverse the given sentence
+  private static void reverseTheSentence(String inputSentence){
+    String givenSentence = "hello welcome to spring world";
+    String reverseSentence = reverseSentence(givenSentence);
+    System.out.println(givenSentence);
+    System.out.println(reverseSentence);
+  }
+  private static String reverseSentence(String sentence){
+    String inputSentence = sentence.trim();
+    String[] words = inputSentence.split("\\s+");
+    StringBuilder sb = new StringBuilder();
+    for(int index=words.length-1; index>=0; index--){
+      sb.append(words[index]+" ");
+    }
+    return sb.toString().trim();
+  }
+
 }
