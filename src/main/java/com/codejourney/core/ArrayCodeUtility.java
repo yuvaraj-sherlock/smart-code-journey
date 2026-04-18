@@ -18,6 +18,7 @@ Important methods:
       Collectors.counting()
       mapToInt(Character::getNumericValue)
             .sum();
+      Collectors.joining()
 */
 public class ArrayCodeUtility {
   public static void main(String[] args) {
@@ -63,9 +64,11 @@ public class ArrayCodeUtility {
   }
 
   private static void removeDuplicates(String dup) {
-    dup.chars().mapToObj(c -> (char) c)
+    String unqString = dup.chars().mapToObj(c -> (char) c)
             .distinct()
-            .forEach(System.out::print);
+            .map(String::valueOf)
+            .collect(Collectors.joining());
+    System.out.println(unqString);
   }
 
   private static void findDuplicates(String dup) {
