@@ -33,5 +33,11 @@ public class PalindromeCheck {
     } else {
       System.out.println("The given string: " + str + " is formed a palindrome");
     }
+
+    //Palindrome check directly without using Streams
+    String str2 = "madam";
+    String reversedStr = new StringBuilder(str2).reverse().toString();
+    boolean isPalindrome = str2.equals(reversedStr);
+    System.out.println(str2+" is " + isPalindrome);
   }
 }
