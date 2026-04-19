@@ -41,6 +41,9 @@ public class ArraySmallestAndLargest {
 
         System.out.println("\n--- Second-Largest (Stream) ---");
         findSecondLargestUsingStream(input);
+
+      System.out.println("\n--- Second-Largest (CORE) ---");
+      findSecondLargestUsingWihtoutStream(input);
     }
 
     /** Stream: sort and limit to first 2 unique elements */
@@ -73,5 +76,28 @@ public class ArraySmallestAndLargest {
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Array must contain at least two distinct elements"));
         System.out.println("Second Largest: " + secondLargest);
+    }
+
+    private static void findSecondLargestUsingWihtoutStream(int[] input) {
+      Integer largest = null;
+      Integer secondLargest = null;
+
+      for (int num : input) {
+        // Update largest
+        if (largest == null || num > largest) {
+          secondLargest = largest;
+          largest = num;
+        }
+
+        // Update second largest
+        else if (num != largest && (secondLargest == null || num > secondLargest)) {
+          secondLargest = num;
+        }
+      }
+      if (secondLargest == null) {
+        System.out.println("No second largest element");
+      } else {
+        System.out.println(secondLargest);
+      }
     }
 }
